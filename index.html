@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agents Messaging — Desktop App</title>
+<meta name="description" content="Download the Agents Messaging desktop app for macOS and Windows. A native window wrapper around agent.vyg.app." />
+<meta property="og:title" content="Agents Messaging — Desktop App" />
+<meta property="og:description" content="Download Agents Messaging for macOS and Windows." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://apps.shawonmajid.com" />
+<link rel="icon" href="/assets/icon.ico" type="image/x-icon" />
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --bg-card: #131316;
+    --border: #1f1f23;
+    --fg: #f5f5f7;
+    --fg-muted: #8a8a93;
+    --accent: #ff7a59;
+    --accent-2: #ec4899;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body {
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(255, 122, 89, 0.18), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(236, 72, 153, 0.12), transparent 50%),
+      var(--bg);
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 24px 64px;
+    text-align: center;
+  }
+  .icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px -10px rgba(255, 122, 89, 0.35);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .icon img {
+    width: 64px;
+    height: 64px;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .tagline {
+    font-size: 18px;
+    color: var(--fg-muted);
+    max-width: 460px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+  .downloads {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--fg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    min-width: 240px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .btn:hover {
+    border-color: #2c2c33;
+    background: #18181c;
+    transform: translateY(-1px);
+  }
+  .btn svg { flex-shrink: 0; width: 28px; height: 28px; }
+  .btn .label-block { display: flex; flex-direction: column; line-height: 1.15; }
+  .btn .small { font-size: 11px; color: var(--fg-muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+  .btn .big { font-size: 16px; font-weight: 600; }
+  .hint {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-top: 20px;
+  }
+  .hint a { color: var(--fg); text-decoration: underline; text-decoration-color: #444; text-underline-offset: 3px; }
+  .hint a:hover { text-decoration-color: var(--fg); }
+  .notes {
+    margin-top: 56px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+  .notes h3 {
+    color: var(--fg);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .notes code {
+    background: #0a0a0b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--fg);
+  }
+  .notes details { margin-top: 14px; }
+  .notes summary { color: var(--fg); cursor: pointer; font-weight: 500; }
+  .notes ul { margin: 10px 0 0 18px; }
+  footer {
+    margin-top: 64px;
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  footer a { color: var(--fg-muted); text-decoration: none; }
+  footer a:hover { color: var(--fg); }
+  @media (max-width: 480px) {
+    h1 { font-size: 34px; }
+    .btn { min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="icon"><img src="/assets/icon.ico" alt="Agents Messaging" /></div>
+    <h1>Agents Messaging</h1>
+    <p class="tagline">Native desktop app for the LiveRecover Front Plugin. Fast, lightweight, and always at hand.</p>
+
+    <div class="downloads">
+      <a class="btn" href="https://github.com/shawon-majid/apps-shawonmajid/releases/latest/download/Agents-Messaging-mac-arm64.dmg" id="mac-dl">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/>
+        </svg>
+        <span class="label-block">
+          <span class="small">Download for</span>
+          <span class="big">macOS · Apple Silicon</span>
+        </span>
+      </a>
+      <a class="btn" href="https://github.com/shawon-majid/apps-shawonmajid/releases/latest/download/Agents-Messaging-windows-x64.msi" id="win-dl">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 5.479L10.55 4.44v7.32H3V5.48zm0 13.042V12.24h7.55v7.32L3 18.521zm8.45-13.222L21 4v8.24h-9.55V5.299zm0 14.402V12.96H21V20l-9.55-1.299z"/>
+        </svg>
+        <span class="label-block">
+          <span class="small">Download for</span>
+          <span class="big">Windows · x64</span>
+        </span>
+      </a>
+    </div>
+    <p class="hint">
+      Or use it in your browser at <a href="https://agent.vyg.app">agent.vyg.app</a>
+    </p>
+
+    <section class="notes">
+      <h3>First-time install notes</h3>
+      <p><strong style="color:var(--fg)">macOS:</strong> The app is not signed with an Apple Developer ID yet. The first time you open it, right-click the app in your Applications folder and choose <code>Open</code> &rarr; <code>Open</code>. After that, normal double-click works.</p>
+      <p style="margin-top:10px"><strong style="color:var(--fg)">Windows:</strong> The installer is not yet code-signed. SmartScreen may show "Windows protected your PC" &mdash; click <code>More info</code> &rarr; <code>Run anyway</code>.</p>
+      <details>
+        <summary>Need Intel Mac or older Windows builds?</summary>
+        <ul>
+          <li>The current build is Apple Silicon (M1/M2/M3/M4) only. Intel Mac support can be added &mdash; <a href="https://github.com/shawon-majid/apps-shawonmajid/issues" style="color:var(--fg)">open an issue</a>.</li>
+          <li>Windows build is x64. ARM64 Windows is not yet supported.</li>
+        </ul>
+      </details>
+    </section>
+
+    <footer>
+      Built with <a href="https://github.com/tw93/Pake">Pake</a> &middot;
+      <a href="https://github.com/shawon-majid/apps-shawonmajid">Source on GitHub</a>
+    </footer>
+  </main>
+  <script>
+    // Optional: auto-highlight the user's platform.
+    (function(){
+      var ua = navigator.userAgent;
+      var mac = /Mac/i.test(ua);
+      var win = /Win/i.test(ua);
+      var primary = mac ? document.getElementById('mac-dl') : win ? document.getElementById('win-dl') : null;
+      if (primary) {
+        primary.style.borderColor = '#ff7a59';
+        primary.style.background = 'linear-gradient(135deg, rgba(255,122,89,0.12), rgba(236,72,153,0.08))';
+      }
+    })();
+  </script>
+</body>
+</html>

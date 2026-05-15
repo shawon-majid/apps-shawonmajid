@@ -1,0 +1,101 @@
+name: Build Pake desktop app
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach builds to (e.g. v1.0.0). Leave blank to only build artifacts."
+        required: false
+        default: ""
+
+env:
+  APP_NAME: "Agents Messaging"
+  APP_URL: "https://agent.vyg.app"
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            ext: dmg
+            asset_name: Agents-Messaging-mac-arm64.dmg
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            ext: msi
+            asset_name: Agents-Messaging-windows-x64.msi
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Install pake-cli
+        run: npm install -g pake-cli@latest
+
+      - name: Build app
+        shell: bash
+        run: |
+          pake "$APP_URL" \
+            --name "$APP_NAME" \
+            --targets "${{ matrix.target }}"
+
+      - name: Locate built artifact
+        id: locate
+        shell: bash
+        run: |
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            artifact=$(find . -type f -name "*.dmg" | head -n 1)
+          else
+            artifact=$(find . -type f -name "*.msi" -o -name "*-setup.exe" | head -n 1)
+          fi
+          if [ -z "$artifact" ]; then
+            echo "No artifact found"; exit 1
+          fi
+          # Rename to predictable asset name
+          dest="${{ matrix.asset_name }}"
+          cp "$artifact" "$dest"
+          echo "path=$dest" >> "$GITHUB_OUTPUT"
+          ls -lh "$dest"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}
+          path: ${{ steps.locate.outputs.path }}
+
+      - name: Attach to release (tag push)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.locate.outputs.path }}
+
+      - name: Attach to release (manual dispatch with tag)
+        if: github.event_name == 'workflow_dispatch' && inputs.tag != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          files: ${{ steps.locate.outputs.path }}
