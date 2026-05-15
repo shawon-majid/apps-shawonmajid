@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agents Messaging · Desktop App</title>
+<meta name="description" content="Download Agents Messaging for macOS and Windows — native desktop client for the LiveRecover Front Plugin." />
+<meta property="og:title" content="Agents Messaging · Desktop App" />
+<meta property="og:description" content="Download Agents Messaging for macOS and Windows." />
+<meta property="og:url" content="https://apps.shawonmajid.com/agents-messaging" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any" />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+<main class="wrap">
+  <a class="crumb" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    All apps
+  </a>
+
+  <section class="hero">
+    <div class="icon" style="background: #000; box-shadow: 0 20px 60px -10px rgba(255, 122, 89, 0.35);">
+      <img src="/assets/agents-messaging-icon.png" alt="Agents Messaging" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" />
+    </div>
+    <h1>Agents Messaging</h1>
+    <p class="tagline">Native desktop app for the LiveRecover Front Plugin. Fast, lightweight, and always at hand.</p>
+
+    <div class="downloads">
+      <a class="btn" href="https://github.com/shawon-majid/apps-shawonmajid/releases/latest/download/Agents-Messaging-mac-arm64.dmg" id="mac-dl">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/>
+        </svg>
+        <span class="label-block">
+          <span class="small">Download for</span>
+          <span class="big">macOS · Apple Silicon</span>
+        </span>
+      </a>
+      <a class="btn" href="https://github.com/shawon-majid/apps-shawonmajid/releases/latest/download/Agents-Messaging-windows-x64.msi" id="win-dl">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 5.479L10.55 4.44v7.32H3V5.48zm0 13.042V12.24h7.55v7.32L3 18.521zm8.45-13.222L21 4v8.24h-9.55V5.299zm0 14.402V12.96H21V20l-9.55-1.299z"/>
+        </svg>
+        <span class="label-block">
+          <span class="small">Download for</span>
+          <span class="big">Windows · x64</span>
+        </span>
+      </a>
+    </div>
+    <p class="hint">
+      Or use it in your browser at <a href="https://agent.vyg.app">agent.vyg.app</a>
+    </p>
+  </section>
+
+  <section class="notes">
+    <h3>First-time install notes</h3>
+    <p><strong>macOS:</strong> The app is not signed with an Apple Developer ID yet. The first time you open it, right-click the app in your Applications folder and choose <code>Open</code> &rarr; <code>Open</code>. After that, normal double-click works.</p>
+    <p><strong>Windows:</strong> The installer is not yet code-signed. SmartScreen may show "Windows protected your PC" &mdash; click <code>More info</code> &rarr; <code>Run anyway</code>.</p>
+    <details>
+      <summary>Need Intel Mac or older Windows builds?</summary>
+      <ul>
+        <li>The current build is Apple Silicon (M1/M2/M3/M4) only. Intel Mac support can be added &mdash; <a href="https://github.com/shawon-majid/apps-shawonmajid/issues" style="color:var(--fg)">open an issue</a>.</li>
+        <li>Windows build is x64. ARM64 Windows is not yet supported.</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    Built with <a href="https://github.com/tw93/Pake">Pake</a> &middot;
+    <a href="https://github.com/shawon-majid/apps-shawonmajid">Source</a>
+  </footer>
+</main>
+<script>
+  (function(){
+    var ua = navigator.userAgent;
+    var mac = /Mac/i.test(ua);
+    var win = /Win/i.test(ua);
+    var primary = mac ? document.getElementById('mac-dl') : win ? document.getElementById('win-dl') : null;
+    if (primary) primary.classList.add('primary');
+  })();
+</script>
+</body>
+</html>

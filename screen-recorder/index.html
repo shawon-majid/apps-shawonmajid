@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Screen Recorder · Desktop App</title>
+<meta name="description" content="Download Screen Recorder for macOS — Loom-style local recorder with screen, camera bubble, mic, and system audio in one MP4." />
+<meta property="og:title" content="Screen Recorder · macOS" />
+<meta property="og:description" content="Loom-style local recorder for macOS — screen + camera + mic + system audio." />
+<meta property="og:url" content="https://apps.shawonmajid.com/screen-recorder" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any" />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body class="theme-red">
+<main class="wrap">
+  <a class="crumb" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    All apps
+  </a>
+
+  <section class="hero">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <h1>Screen Recorder</h1>
+    <p class="tagline">Loom-style local recorder. Screen + camera bubble + microphone + system audio, all in one MP4. No subscription, no upload.</p>
+
+    <div class="downloads">
+      <a class="btn primary" href="https://github.com/shawon-majid/screen-recorder/releases/latest/download/ScreenRecorder-mac-arm64.dmg" id="mac-dl">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/>
+        </svg>
+        <span class="label-block">
+          <span class="small">Download for</span>
+          <span class="big">macOS · Apple Silicon</span>
+        </span>
+      </a>
+    </div>
+    <p class="hint">
+      Requires macOS 14 (Sonoma) or later &middot; <a href="https://github.com/shawon-majid/screen-recorder">Source</a>
+    </p>
+  </section>
+
+  <section class="notes">
+    <h3>What it captures</h3>
+    <p>Screen video (H.264, up to 1440p), camera mirrored as a Loom-style bubble, microphone, and system audio. Output lands in <code>~/Movies/ScreenRecorder/</code>.</p>
+
+    <h3 style="margin-top:24px">First-time install</h3>
+    <p><strong>1. Drag to Applications.</strong> Open the DMG and drag <code>ScreenRecorder</code> onto the <code>Applications</code> shortcut.</p>
+    <p><strong>2. Bypass Gatekeeper on first launch.</strong> The build is ad-hoc signed, not Apple Developer signed. Right-click <code>ScreenRecorder</code> in Applications &rarr; <code>Open</code> &rarr; <code>Open</code>. macOS remembers your approval after the first time.</p>
+    <p><strong>3. Grant permissions when prompted.</strong> macOS will ask for Screen Recording, Camera, and Microphone the first time you record. Grant each in <code>System Settings &rarr; Privacy &amp; Security</code>.</p>
+
+    <details>
+      <summary>Recording defaults & one-liner for single-track export</summary>
+      <p style="margin-top:10px">Defaults are 1080p + Balanced encoding, ideal for 20-30 minute tutorials where file size matters.</p>
+      <p>Mic and system audio land as two separate AAC tracks. To mix them into a single audio track:</p>
+      <pre style="margin-top:10px; padding:12px; background:#0a0a0b; border-radius:6px; font-size:12px; overflow-x:auto;"><code>ffmpeg -i recording.mp4 \
+  -filter_complex "[0:a:0][0:a:1]amix=inputs=2:duration=longest[a]" \
+  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k mixed.mp4</code></pre>
+    </details>
+
+    <details>
+      <summary>Intel Mac or Windows?</summary>
+      <ul>
+        <li><strong>Intel Mac:</strong> not in this release. The app uses ScreenCaptureKit (macOS 14+) which works on Intel, but the v0.1.0 binary is Apple Silicon only. <a href="https://github.com/shawon-majid/screen-recorder/issues" style="color:var(--fg)">Open an issue</a> if you need Intel.</li>
+        <li><strong>Windows:</strong> not supported. ScreenCaptureKit is Apple-only. A Windows port would require a different capture backend.</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    Built with Swift &middot; <a href="https://github.com/shawon-majid/screen-recorder">Source</a>
+  </footer>
+</main>
+<script>
+  (function(){
+    var ua = navigator.userAgent;
+    var mac = /Mac/i.test(ua);
+    if (!mac) {
+      var btn = document.getElementById('mac-dl');
+      if (btn) btn.classList.remove('primary');
+    }
+  })();
+</script>
+</body>
+</html>
