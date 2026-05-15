@@ -11,6 +11,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write
+
 env:
   APP_NAME: "Agents Messaging"
   APP_URL: "https://agent.vyg.app"
